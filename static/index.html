@@ -1,0 +1,121 @@
+<style>
+* {
+	box-sizing: border-box !important;
+}
+
+span.svg {
+	display: inline-block;
+	user-select: none;
+}
+
+span.svg img {
+	background: #fdfdfd;
+	border: 2px solid #999;
+	pointer-events: none;
+
+  -webkit-user-select: none; /* Chrome all / Safari all */
+  -moz-user-select: none;   /* Firefox all */
+  -ms-user-select: none;  /* IE 10+ */
+   user-select: none;  /* Likely future */ 
+}
+
+span.svg:not(.full) img {
+	height: 100%;
+	max-width: 100%;
+}
+
+span.full img {
+	height: 90%;
+	max-width: 100%;
+}
+
+span.svg:not(.full) {
+	width: 104px;
+	height: 137px;
+	display: inline-block;
+}
+
+span.full {
+	position: fixed;
+	background: rgba(0, 0, 0, 0.7);
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	justify-items: center;
+	align-content: center;
+	align-items: center;
+}
+</style>
+
+<h1>Notebooks</h1>
+
+<div id="notebooks">
+</div>
+
+<script>
+function graphql(doc, variables) {
+	return fetch('/graphql', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			query: doc,
+			variables: variables || {},
+		})
+	})
+	.then(res => res.json());
+}
+
+function targetify(name) {
+	return name.replace(/[^A-Za-z]/g, '');
+}
+
+function renderNotebooks() {
+	graphql(`
+		query {
+			notebooks {
+				name
+				pages {
+					id
+				}
+			}
+		}
+	`)
+	.then(json => {
+		const notebooks = json.data.notebooks;
+		console.log(notebooks);
+		notebooks.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+		document.querySelector('#notebooks').innerHTML = `
+			<ul>
+				${notebooks
+					.map(notebook => {
+						let targetID = `notebook-${targetify(notebook.name)}`;
+						return `
+							<li>Notebook: ${notebook.name} (${notebook.pages.length})<div id="${targetID}"></div></li>
+							${notebook.pages
+								.map((page, i) => `<span class="svg"><img src="notebook/${notebook.name}/${i}"></span>`)
+								.join('')}
+						`;
+					})
+					.join('')}
+			</ul>
+		`;
+	});
+}
+
+renderNotebooks();
+document.addEventListener('click', (e) => {
+	console.log(e.target);
+	if (e.target.classList.contains('svg')) {
+		console.log('etarget', e.target);
+		Array.from(document.querySelectorAll('svg.full'))
+			.map(x => x.classList.remove('full'));
+		e.target.classList.toggle('full');
+	}
+});
+
+</script>

@@ -1,0 +1,119 @@
+.App-sidebar, .App-sidebar li,
+.App-pages, .App-pages li,
+.App-notebooks, .App-notebooks li {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.App-sidebar {
+  position: fixed;
+  width: 240px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: #ccc;
+}
+
+.App-sidebar li {
+  display: block;
+  padding: 10px 14px;
+  border-bottom: 1px solid #888;
+  margin: 4px 0;
+  color: #333;
+  background: #eee;
+  cursor: pointer;
+}
+
+.App-sidebar .size {
+  float: right;
+  font-size: 0.8em;
+  opacity: 0.7;
+}
+
+.App-sidebar li.selected {
+  background: #fff;
+}
+
+.App-notebooks {
+  position: fixed;
+  top: 0;
+  left: 240px;
+  right: 0;
+  bottom: 0;
+  background: #aaa;
+  padding: 20px;
+}
+
+.App-notebooks.full {
+  background: rgba(0, 0, 0, .8);
+}
+
+.App-notebooks.icons {
+  overflow-y: auto;
+}
+
+.App-notebooks.icons .App-pages {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  margin-bottom: 20px;
+  grid-auto-rows: 1fr
+}
+
+.App-notebooks.full .App-pages {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 10px;
+  grid-template-rows: 100%;
+  height: 100%;
+  justify-content: middle;
+}
+
+.page {
+  display: block;
+  user-select: none;
+  cursor: pointer;
+}
+
+.page img {
+	background: #fdfdfd;
+	border: 2px solid #999;
+  pointer-events: none;
+
+  display: block;
+	height: 100%;
+  max-width: 100%;
+  min-width: 60px;
+  margin: 0 auto;
+
+  text-align: center;
+  font-size: 10px;
+  line-height: 100%;
+  font-family: Arial;
+  color: #666;
+
+  -webkit-user-select: none; /* Chrome all / Safari all */
+  -moz-user-select: none;   /* Firefox all */
+  -ms-user-select: none;  /* IE 10+ */
+  user-select: none;  /* Likely future */ 
+}
+
+.App-notebooks.icons .page:hover img {
+  box-shadow: 0px 0px 8px #fff;
+  outline: 1px solid #777;
+}
+
+.page-flex {
+  height: 100%;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.page-flex-info {
+  color: white;
+  width: 754px;
+  margin: 0 auto;
+  padding: 20px 30px 50px;
+}

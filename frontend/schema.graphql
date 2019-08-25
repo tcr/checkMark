@@ -1,0 +1,25 @@
+schema {
+  query: Root
+  mutation: Mutations
+}
+
+type Mutations {
+  download: String!
+}
+
+type Notebook {
+  id: ID!
+  name: String!
+  pages: [Page!]!
+}
+
+type Page {
+  id: ID!
+  svg: String
+  modified: String!
+}
+
+type Root {
+  viewerId: String!
+  notebooks: [Notebook!]!
+}
