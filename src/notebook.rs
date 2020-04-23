@@ -53,8 +53,8 @@ pub fn notebook_render(command: SvgRenderCommand) -> Result<(), Box<dyn Error>> 
 
     // Load or create the outfile.
     let re_rm = Regex::new(r"\.rm$").unwrap();
-    let svgfilename = re_rm.replace_all(&source, ".svg");
-    println!("Rendering: {:?}", source);
+    let svgfilename = re_rm.replace_all(&source, ".svg").to_string();
+    println!("Rendering: {:?}", svgfilename);
 
     let pdffile = NamedTempFile::new()?;
 

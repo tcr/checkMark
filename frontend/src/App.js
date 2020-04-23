@@ -4,6 +4,10 @@ import graphql from 'babel-plugin-relay/macro';
 import { QueryRenderer } from 'react-relay';
 import environment from './environment';
 
+function redirect(url) {
+  window.open(url, '_blank');
+}
+
 function NotebookView(props) {
   const {currentPage, setCurrentPage, notebook} = props;
   useEffect(() => {
@@ -44,6 +48,16 @@ function NotebookView(props) {
                   <div className="page-flex-info">
                     <h2>Page {i + 1}<br /></h2>
                     <p>Modified in {notebook.pages[i].modified}</p>
+                    <div className="page-flex-info-download">
+                      Download:
+                      <button onClick={() => redirect(notebook.pages[i].svg)}>SVG</button>
+                      <button onClick={() => redirect(notebook.pages[i].svg)}>PDF</button>
+                      <button onClick={e => {
+                        redirect('http://localhost:8080' + notebook.pages[i].png);
+                        e.preventDefault();
+                        e.stopPropagation();
+                      }}>PNG</button>
+                    </div>
                   </div>
                 </div>
               </li>);
@@ -77,7 +91,7 @@ function Sidebar(props) {
   const {notebooks, currentNotebook, setCurrentNotebook, setCurrentPage} = props;
   return (
     <ul className="App-sidebar">
-      <h2 style={{textAlign: 'center'}}>naps/notebook</h2>
+      <h2 style={{textAlign: 'center'}}>checkMark</h2>
       {notebooks
         .map((notebook, i) => {
           return (
@@ -110,6 +124,7 @@ function App() {
             pages {
               id
               svg
+              png
               modified
             }
           }

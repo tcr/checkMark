@@ -117,3 +117,14 @@
   margin: 0 auto;
   padding: 20px 30px 50px;
 }
+
+.page-flex-info-download button {
+  font-size: 16px;
+  margin-left: 10px;
+  filter: invert(1.0);
+  cursor: pointer;
+}
+
+.page-flex-info-download button:hover {
+  filter: invert(0.8);
+}

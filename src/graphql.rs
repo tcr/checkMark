@@ -17,6 +17,10 @@ juniper::graphql_object!(Page: () |&self| {
         self.svg.clone()
     }
 
+    field png() -> Option<String> {
+        self.svg.clone().map(|x| x.replace(".svg", ".png"))
+    }
+
     field modified() -> String { // TODO time
         self.modified.clone()
     }
@@ -52,7 +56,13 @@ juniper::graphql_object!(Root: () |&self| {
 
 pub struct Mutations;
 
-juniper::graphql_object!(Mutations: () | &self | {});
+juniper::graphql_object!(Mutations: () | &self | {
+    field viewer_id() -> FieldResult<String> {
+        let start = SystemTime::now();
+        let since_the_epoch = start.duration_since(UNIX_EPOCH).expect("Time went backwards");
+        Ok(format!("{:?}", since_the_epoch))
+    }
+});
 
 pub type Schema = RootNode<'static, Root, Mutations>;
 

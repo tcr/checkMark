@@ -4,7 +4,7 @@ schema {
 }
 
 type Mutations {
-  download: String!
+  viewerId: String!
 }
 
 type Notebook {
@@ -16,6 +16,7 @@ type Notebook {
 type Page {
   id: ID!
   svg: String
+  png: String
   modified: String!
 }
 

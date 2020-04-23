@@ -1,11 +1,11 @@
 [package]
-name = "market"
+name = "checkmark"
 version = "0.1.0"
 authors = ["Tim Ryan <id@timryan.org>"]
 edition = "2018"
 
 [dependencies]
-warp = "0.1.8"
+warp = "0.1"
 juniper = { version = "0.13.0", features = ["serde_json"] }
 juniper_warp = "0.4"
 serde_json = "1.0.24"
@@ -21,6 +21,7 @@ zip = "0.5.3"
 crossbeam-channel = "*"
 regex = "*"
 tempfile = "3"
+resvg = { version = "0.8", features = ["cairo-backend"] }
 sha-1 = "0.8"
 rayon = "1"
 percent-encoding = "1"

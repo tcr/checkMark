@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 5e83f38abcf071bfd8be5404bf1bac0b
+ * @relayHash d7fdc0b313b2e482a0a1a06a04211872
  */
 
 /* eslint-disable */
@@ -17,6 +17,7 @@ export type AppQueryResponse = {|
     +pages: $ReadOnlyArray<{|
       +id: string,
       +svg: ?string,
+      +png: ?string,
       +modified: string,
     |}>,
   |}>
@@ -36,6 +37,7 @@ query AppQuery {
     pages {
       id
       svg
+      png
       modified
     }
   }
@@ -88,6 +90,13 @@ v1 = [
           {
             "kind": "ScalarField",
             "alias": null,
+            "name": "png",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
             "name": "modified",
             "args": null,
             "storageKey": null
@@ -117,11 +126,11 @@ return {
     "operationKind": "query",
     "name": "AppQuery",
     "id": null,
-    "text": "query AppQuery {\n  notebooks {\n    id\n    name\n    pages {\n      id\n      svg\n      modified\n    }\n  }\n}\n",
+    "text": "query AppQuery {\n  notebooks {\n    id\n    name\n    pages {\n      id\n      svg\n      png\n      modified\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'be9f0bb090562b0e254f48b8fdf989ff';
+(node/*: any*/).hash = '7d91fcc36158f4ba72468873e102a66e';
 module.exports = node;
